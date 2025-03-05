@@ -21,20 +21,29 @@ model User {
   @@map("users")
 }
 model Battery {
-  id        String   @id @default(uuid())
-  name      String
-  description String?
-  file      String?
-  quantity  Int
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id             String   @id @default(uuid())
+  name           String
+  description    String?
+  file           String?
+  quantity       Int
+  image          String
+  specs          String[]
+  features       String[]
+  certifications String[]
+  datasheet      String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 }
 model Reflector {
-  id        String   @id @default(uuid())
-  name      String
-  description String
-  file      String
-  quantity  Int
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id            String   @id @default(uuid())
+  name          String
+  image         String
+  specs         String[]
+  features      String[]
+  certifications String[]
+  datasheet     String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@map("reflectors")
 }

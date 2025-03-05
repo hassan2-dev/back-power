@@ -12,9 +12,11 @@ export class ReflectorsService {
     return this.prisma.reflector.create({
       data: {
         name: createReflectorDto.name,
-        description: createReflectorDto.description,
-        file: createReflectorDto.file,
-        quantity: createReflectorDto.quantity,
+        image: createReflectorDto.image,
+        specs: createReflectorDto.specs,
+        features: createReflectorDto.features,
+        certifications: createReflectorDto.certifications,
+        datasheet: createReflectorDto.datasheet,
       },
     });
   }
@@ -29,14 +31,19 @@ export class ReflectorsService {
     });
   }
 
-  update(id: string, updateReflectorDto: UpdateReflectorDto): Promise<Reflector> {
+  update(
+    id: string,
+    updateReflectorDto: UpdateReflectorDto,
+  ): Promise<Reflector> {
     return this.prisma.reflector.update({
       where: { id },
       data: {
         name: updateReflectorDto.name,
-        description: updateReflectorDto.description,
-        file: updateReflectorDto.file,
-        quantity: updateReflectorDto.quantity,
+        image: updateReflectorDto.image,
+        specs: updateReflectorDto.specs,
+        features: updateReflectorDto.features,
+        certifications: updateReflectorDto.certifications,
+        datasheet: updateReflectorDto.datasheet,
       },
     });
   }
