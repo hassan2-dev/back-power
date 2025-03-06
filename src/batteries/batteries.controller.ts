@@ -32,6 +32,8 @@ export class BatteriesController {
       { name: 'datasheet', maxCount: 1 }
     ], multerConfig)
   )
+
+  
   async create(
     @Body() createBatteryDto: CreateBatteryDto,
     @UploadedFiles() files: {
