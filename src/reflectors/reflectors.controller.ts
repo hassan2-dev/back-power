@@ -1,4 +1,5 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFiles } from '@nestjs/common';
+import { FileFieldsInterceptor } from '@nestjs/platform-express';
 import { ReflectorsService } from './reflectors.service';
 import { CreateReflectorDto } from './dto/create-reflector.dto';
 import { UpdateReflectorDto } from './dto/update-reflector.dto';
@@ -8,8 +9,18 @@ export class ReflectorsController {
   constructor(private readonly reflectorsService: ReflectorsService) {}
 
   @Post()
-  create(@Body() createReflectorDto: CreateReflectorDto) {
-    return this.reflectorsService.create(createReflectorDto);
+  @UseInterceptors(FileFieldsInterceptor([
+    { name: 'image', maxCount: 1 },
+    { name: 'datasheet', maxCount: 1 },
+  ]))
+  create(
+    @Body() createReflectorDto: CreateReflectorDto,
+    @UploadedFiles() files: {
+      image?: Express.Multer.File[];
+      datasheet?: Express.Multer.File[];
+    },
+  ) {
+    return this.reflectorsService.create(createReflectorDto, files);
   }
 
   @Get()

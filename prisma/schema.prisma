@@ -26,7 +26,7 @@ model Battery {
   description    String?
   file           String?
   quantity       Int
-  image          String
+  image          String?
   specs          String[]
   features       String[]
   certifications String[]

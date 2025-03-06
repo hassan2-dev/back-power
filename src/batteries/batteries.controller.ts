@@ -30,17 +30,28 @@ export class BatteriesController {
       { name: 'image', maxCount: 1 },
       { name: 'file', maxCount: 1 },
       { name: 'datasheet', maxCount: 1 }
-    ], multerConfig as MulterOptions)
+    ], multerConfig)
   )
-  create(
+  async create(
     @Body() createBatteryDto: CreateBatteryDto,
     @UploadedFiles() files: {
-      image?: Express.Multer.File[];
-      file?: Express.Multer.File[];
-      datasheet?: Express.Multer.File[];
+      image?: Express.Multer.File[],
+      file?: Express.Multer.File[],
+      datasheet?: Express.Multer.File[]
     }
   ) {
-    if (!files?.image?.length) {
+    // Debug logging
+    console.log('Received files:', {
+      image: files?.image?.[0] ? {
+        name: files.image[0].originalname,
+        size: files.image[0].size,
+        buffer: files.image[0].buffer ? 'Present' : 'Missing'
+      } : 'No image',
+      file: files?.file?.[0] ? 'Present' : 'Missing',
+      datasheet: files?.datasheet?.[0] ? 'Present' : 'Missing'
+    });
+
+    if (!files?.image) {
       throw new BadRequestException('Image file is required');
     }
     return this.batteriesService.create(createBatteryDto, files);

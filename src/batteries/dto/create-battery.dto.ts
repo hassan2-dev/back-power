@@ -8,9 +8,6 @@ export class CreateBatteryDto {
     @IsString()
     name: string;
 
-    @IsString()
-    image: string;
-
     @IsArray()
     @Transform(({ value }: TransformFnParams) =>
         Array.isArray(value) ? value : JSON.parse(value as string) as string[]
@@ -36,16 +33,13 @@ export class CreateBatteryDto {
     @IsOptional()
     description?: string;
 
-    @IsString()
-    @IsOptional()
-    file?: string;
-
-    @IsString()
-    @IsOptional()
-    datasheet?: string;
-
     @IsInt()
     @Min(0)
     @Transform(({ value }: TransformFnParams) => parseInt(value as string))
     quantity: number;
+
+    // Remove image validation since it will be handled as a file
+    image?: any;
+    file?: any;
+    datasheet?: any;
 }

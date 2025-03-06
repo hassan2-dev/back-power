@@ -1,12 +1,19 @@
-import { diskStorage } from 'multer';
-import { extname } from 'path';
+import { memoryStorage } from 'multer';
 
 export const multerConfig = {
-  storage: diskStorage({
-    destination: './uploads',
-    filename: (req, file, callback) => {
-      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-      callback(null, `${file.fieldname}-${uniqueSuffix}${extname(file.originalname)}`);
-    },
-  }),
+  storage: memoryStorage(),
+  limits: {
+    fileSize: 10 * 1024 * 1024, // 10MB limit
+  },
+  preservePath: true,
+  fileFilter: (req: any, file: any, cb: any) => {
+    // Debug logging
+    console.log('Received file:', {
+      fieldname: file.fieldname,
+      originalname: file.originalname,
+      encoding: file.encoding,
+      mimetype: file.mimetype
+    });
+    cb(null, true);
+  }
 }; 
