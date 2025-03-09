@@ -1,5 +1,6 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
+ 
 /* eslint-disable prettier/prettier */
 import { IsString, IsInt, IsOptional, Min, IsArray } from 'class-validator';
 import { Transform, TransformFnParams } from 'class-transformer';

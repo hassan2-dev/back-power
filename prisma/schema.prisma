@@ -34,16 +34,18 @@ model Battery {
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 }
-model Reflector {
-  id            String   @id @default(uuid())
-  name          String
-  image         String
-  specs         String[]
-  features      String[]
-  certifications String[]
-  datasheet     String?
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+   model Reflector {
+     id            String   @id @default(uuid())
+     name          String
+     description   String?  // Make sure this exists
+     image         String
+     file          String?  // Make sure this exists
+     specs         String[]
+     features      String[]
+     certifications String[]
+     datasheet     String?
+     createdAt     DateTime @default(now())
+     updatedAt     DateTime @updatedAt
 
-  @@map("reflectors")
-}
+     @@map("reflectors")
+   }
